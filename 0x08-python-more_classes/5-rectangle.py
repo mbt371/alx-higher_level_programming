@@ -70,3 +70,4 @@ class Rectangle():
     def __del__(self):
         """Builtin to ensure proper deletion of instance"""
         print("Bye rectangle...")
+
