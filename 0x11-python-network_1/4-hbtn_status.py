@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-""" shows alx status """
+"""Python script that fetches https://intranet.hbtn.io/status"""
+import requests
 
 if __name__ == "__main__":
-    import requests
-    html = requests.get('https://intranet.hbtn.io/status')
-    print("Body response:")
-    print("\t- type: {}".format(html.text.__class__))
-    print("\t- content: {}".format(html.text))
+    response = requests.get('https://intranet.hbtn.io/status')
+    req = "Body response:\n\t- type: {}\n\t- content: {}"
+    print(req.format(type(response.text), response.text))
