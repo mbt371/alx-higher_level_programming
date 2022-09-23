@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-""" MODULE TO TEST INTRANET STATUS """
+""" script that fetches https://intranet.hbtn.io/status
+    -You must use the package urllib
+    -You must use a with statement """
+import urllib.request
 
-if __name__ == "__main__":
-    import urllib.request
-    req = urllib.request.Request('https://intranet.hbtn.io/status')
-    with urllib.request.urlopen(req) as response:
-        html = response.read()
 
+if __name__ == '__main__':
+    url = 'https://intranet.hbtn.io/status'
+    with urllib.request.urlopen(url) as response:
+        req_pag = response.read()
     print("Body response:")
-    print("\t- type: {}".format(html.__class__))
-    print("\t- content: {}".format(html))
-    print("\t- utf8 content: {}".format(html.decode('ascii')))
+    print("\t- type: {}".format(type(req_pag)))
+    print("\t- content: {}".format(req_pag))
+    print("\t- utf8 content: {}".format(req_pag.decode('utf-8')))
