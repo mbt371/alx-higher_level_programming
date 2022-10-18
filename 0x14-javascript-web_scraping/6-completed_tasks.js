@@ -1,24 +1,19 @@
 #!/usr/bin/node
-const request = require('request');
+const axios = require('axios');
 const url = process.argv[2];
-request(url, function (err, response, body) {
+
+axios(url, { json: true }, function (err, res, body) {
   if (err) {
-    console.log(err);
-  } else if (response.statusCode === 200) {
-    let completed = {};
-    let tasks = JSON.parse(body);
-    for (let i in tasks) {
-      let task = tasks[i];
-      if (task.completed === true) {
-        if (completed[task.userId] === undefined) {
-          completed[task.userId] = 1;
-        } else {
-          completed[task.userId]++;
-        }
-      }
-    }
-    console.log(completed);
-  } else {
-    console.log('An error occured. Status code: ' + response.statusCode);
+    return console.log(err);
   }
+  const resOut = {};
+  for (const rs of body) {
+    if (rs.completed) {
+      if (resOut[rs.userId] === undefined) {
+        resOut[rs.userId] = 0;
+      }
+      resOut[rs.userId] += 1;
+    }
+  }
+  console.log(resOut);
 });
