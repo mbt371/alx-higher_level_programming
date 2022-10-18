@@ -1,11 +1,10 @@
 #!/usr/bin/node
-const axios = require('axios');
-async function makeHeadRequest () {
-  try {
-    const res = await axios.head(process.argv[2]);
-    console.log(`code: ${res.status}`);
-  } catch (err) {
-    console.log('code:', err.response.status);
+const request = require('request');
+const url = process.argv[2];
+request(url, function (err, response) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('code: ' + response.statusCode);
   }
-}
-makeHeadRequest();
+});
